@@ -8,6 +8,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+button {
+  outline: none;
+}
+
 main {
   display: inline-flex;
   flex-direction: row;
