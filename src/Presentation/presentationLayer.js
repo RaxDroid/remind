@@ -1,5 +1,5 @@
 //  Packages
-const { app } = require("electron");
+// const { remote } = require("electron");
 
 //  Constants
 const xbutton = document.querySelector('#close-button');
@@ -8,5 +8,6 @@ const xbutton = document.querySelector('#close-button');
 
 xbutton.addEventListener("click", (event) =>{
     event.preventDefault;
-    app.quit();
-});
+    var window = remote.getCurrentWindow();
+    window.close();
+}); 
