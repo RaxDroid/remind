@@ -1,12 +1,20 @@
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('app.db');
+//  Packages
 
 const { ipcMain } = require('electron');
-const sqlite3 = require('sqlite3');
+var sqlite3 = require('sqlite3').verbose();
 
-const database = new sqlite3.Database('./public/db.sqlite3', (err) => {
+//  Constants and Variables
+
+
+//  Logic
+
+class databaseHandler {
+    
+}
+const db = new sqlite3.Database('app.db',  (err) => {
     if (err) console.error('Database opening error: ', err);
 });
+
 
 ipcMain.on('asynchronous-message', (event, arg) => {
     const sql = arg;
