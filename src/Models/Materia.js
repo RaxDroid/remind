@@ -1,8 +1,8 @@
 //  Constants
 
 let materiaTypes = {
-    "Activo": 1,
-    "Inactivo": 2
+    "Inactivo": 4,
+    "Activo": 5
 }
 
 //  Logic
