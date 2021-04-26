@@ -19,7 +19,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.setResizable(false);
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'Presentation/index.html'));
   // mainWindow.$ = mainWindow.jQuery = require("jquery");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
