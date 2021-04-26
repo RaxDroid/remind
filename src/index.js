@@ -11,13 +11,16 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 660,
     height: 720,
+    webPreferences: {
+      nodeIntegration: true
+    }
     // frame: false
   });
 
   // and load the index.html of the app.
   mainWindow.setResizable(false);
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
+  mainWindow.$ = mainWindow.jQuery = require("jquery");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
