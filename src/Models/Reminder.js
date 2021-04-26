@@ -1,5 +1,8 @@
 //  Constants
 
+let Estado = require(".Estado.js");
+const { EstadosReminder } = require("./Estado");
+
 let reminderTypes = {
     "Pendiente": 1,
     "Completado": 2,
@@ -17,4 +20,18 @@ class Reminder{
         this.fecha = fecha;
         this.estado = estado;
     }
+    get MainInfo(){
+        return this.titulo + " - " + this.descripcion;
+    }
+    
+    get EstadoDescription(){
+        let estadoObject = EstadosReminder()
+         estadoObject.forEach(element => {
+             if (element["id"] == estado)
+             return estado + " - " + element["descripcion"];
+        });
+    }
+}
+
+
 exports.Reminder = Reminder;
