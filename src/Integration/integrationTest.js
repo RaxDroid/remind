@@ -4,10 +4,17 @@ let integration = require('./integrationLayer.js');
 var mHandler = new integration.MateriaHandler();
 var rHandler = new integration.ReminderHandler();
 
-var result = rHandler.getAllReminders();
-var x;
-result.then((row) => (x = row), null);
-console.log(x);
+postResult();
+
+async function postResult(){
+    var x = [];
+    var result = await mHandler.getAllMaterias();
+    result.forEach((row) => x.push(row));
+    console.log(x);
+    //result.then((row) => {x.push(row); console.log(x);}, null);
+    
+    
+}
 
 //var result2 = rHandler.getReminderById(1);
 //result2.then((row) => (console.log(row)), null);

@@ -1,7 +1,6 @@
 //  Constants
 
-let Estado = require(".Estado.js");
-const { EstadosReminder } = require("./Estado");
+let Estado = require("./Estado.js");
 
 let reminderTypes = {
     "Pendiente": 1,

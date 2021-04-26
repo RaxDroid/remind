@@ -1,7 +1,6 @@
 //  Constants
 
-let Estado = require(".Estado.js");
-const { EstadosMateria } = require("./Estado");
+let Estado = require("./Estado.js");
 
 let materiaTypes = {
     "Inactivo": 4,
@@ -16,6 +15,9 @@ class Materia{
         this.nombre = nombre;
         this.estado = estado;   
         this.color = color;
+    }
+    get Id(){
+        return this.id;
     }
 
     get Nombre() {
