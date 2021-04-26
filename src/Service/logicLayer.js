@@ -3,18 +3,19 @@
 var modelReminder = require('../Models/Reminder.js');
 var modelMateria = require('../Models/Materia.js');
 var modelEstado = require('../Models/Estado.js');
-var integrationLayer = require('../Integration/integrationLayer.js');
+import { MateriaHandler, ReminderHandler, ExportsHandler, EstadoHandler, StartupHandler } from "../Models/Estado.js";
 
 //  Constants
 
 let materiaList = [];
 let reminderList = [];
+let estadoList = [];
 
 //  Logic
 
 class MateriaService{
     constructor(){
-        materiaHandler = new integrationLayer.MateriaHandler();
+        materiaHandler = new MateriaHandler();
     }
 
     async createMateria(nombre, color){
@@ -104,7 +105,7 @@ class MateriaService{
 
 class ReminderService{
     constructor(){
-        reminderHandler = new integrationLayer.ReminderHandler();
+        reminderHandler = new ReminderHandler();
 
     }
 
@@ -186,7 +187,7 @@ class ReminderService{
         
         try{
         
-        var QuantityChanged = await this.reminderHandler.deleteReminder(id);
+        var QuantityChanged = await this.reminderHandler.deleteReminder();
         reminderList.splice(reminderList.findIndex(function (element){ return element.Id == id}),1);
         return QuantityChanged;
 
@@ -204,11 +205,48 @@ class ReminderService{
     }
 
 }
+class EstadoService{
+    constructor(){
+        estadoHandler = new EstadoHandler();
+
+    }
+    async getAllEstados(){
+
+        try {
+            var estadoResult = await this.EstadoHandler.getAllEstados();
+            estadoList = [];
+            estadoResult.forEach((objectEstado) => { 
+            estadoList.push(new modelEstado.Estado(
+                objectEstado["EstadoId"],
+                objectEstado["Descripcion"],
+                objectEstado["TipoEstado"]
+                ));});
+                return estadoList;
+            
+            
+        } catch (error) {
+            console.error(error);
+            
+        }
+    }
+
+}
+class ExportsService{
+    processExport(exportType){
+        const exportSucess = integrationLayer.ExportsHandler.generateExport(exportType);
+
+        if (exportSucess["bool"]){
+            return exportSucess["path"];
+        }
+        else console.log("No se pudo realizar la exportación");
+    }
+}
 
 function FirstStartService(){
-    integrationLayer.Startup();
-    modelReminder.Startup();
-    modelMateria.Startup();
-    modelEstado.Startup();
+    let startupHandler = new StartupHandler();
+    startupHandler.startupEval();
+    new EstadoService().getAllEstados();
+    new MateriaService().getAllMaterias();
+    new ReminderService().getAllReminders();
 
 }
