@@ -13,4 +13,4 @@ class Estado{
         this.descripcion = descripcion;
         this.tipoEstado = tipoEstado;
     }
-}
+exports.Estado = Estado;
