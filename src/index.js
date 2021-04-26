@@ -10,17 +10,17 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 660,
-    height: 660,
-    frame: false,
+    height: 720,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: true
     }
+    // frame: false
   });
 
   // and load the index.html of the app.
   mainWindow.setResizable(false);
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
+  mainWindow.$ = mainWindow.jQuery = require("jquery");
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };

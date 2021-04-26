@@ -17,5 +17,4 @@ class Reminder{
         this.fecha = fecha;
         this.estado = estado;
     }
-}
 exports.Reminder = Reminder;
