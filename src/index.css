@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap");
 
 * {
   margin: 0;
@@ -7,8 +7,7 @@
 }
 
 body {
-  font-family: Kumbh Sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: Kumbh Sans, sans-serif;
   background-color: #CFDBD5;
   height: 534px;
 }
@@ -19,10 +18,12 @@ h1 {
 }
 
 button {
+  font-family: Kumbh Sans, sans-serif;
   outline: none;
   background-color: #F5CB5C;
   color: #333533;
   border: 2px solid #333533;
+  font-weight: 400;
 }
 
 main {
