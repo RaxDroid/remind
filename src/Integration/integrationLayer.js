@@ -91,11 +91,11 @@ class DatabaseHandler extends Handler{
         
         try {
             if(objectName == "Materia"){
-                data = "\"" + object["nombre"] + "\",\"" + object["estado"] + "\", \"" + object["color"] + "\"";
+                data = "\"" + object["nombre"] + "\",\"" + object.EstadoId + "\", \"" + object["color"] + "\"";
                 nameData = "Nombre, Estado, Color";
             }
             else if(objectName == "Reminder"){
-                data = object["materia"] + ", \"" + object["titulo"] + "\", \"" + object["descripcion"] + "\", \"" + object["fecha"] + "\", " + object["estado"];
+                data = object.MateriaId + ", \"" + object["titulo"] + "\", \"" + object["descripcion"] + "\", \"" + object["fecha"] + "\", " + object.EstadoId;
                 nameData = " MateriaId, Titulo, Descripcion, Fecha, Estado"
             }
             let sql = 'INSERT INTO ' + objectName + "(" + nameData + ")" + " VALUES( " + data + " )";
@@ -117,10 +117,10 @@ class DatabaseHandler extends Handler{
         let sql = "UPDATE " + objectName + " SET ? WHERE " + objectName + "Id = " + object["id"];
 
         if(objectName == "Materia"){
-            let data = "Nombre = " + object["nombre"] + ", Estado = " + object["estado"] + ", Color = " + object["color"];
+            let data = "Nombre = " + object["nombre"] + ", Estado = " + object.EstadoId + ", Color = " + object["color"];
         }
         else if(objectName == "Reminder"){
-            let data = "Materia = " + object["materia"] + ", Titulo = " + object["titulo"] + ", Descripcion = " + object["descripcion"] + ", Fecha =" + object["fecha"] + ", Estado = " + object["estado"];
+            let data = "Materia = " + object.MateriaId + ", Titulo = " + object["titulo"] + ", Descripcion = " + object["descripcion"] + ", Fecha =" + object["fecha"] + ", Estado = " + object.EstadoId;
         }
         
         return new Promise((resolve, reject) => {
@@ -168,9 +168,9 @@ class MateriaHandler{
     }
 
     updateMateria(object, nombre, estado, color){
-        let x = new modelReminder.Reminder(object["id"], nombre, estado, color);
+        let x = new modelReminder.Reminder(object.Id, nombre, estado, color);
         var result = new DatabaseHandler().updateDBObject("Materia", x);
-        return;
+        return x;
     }
 
     deleteMateriaById(id){
@@ -196,14 +196,14 @@ class ReminderHandler{
     createReminder(materia, titulo, descripcion, fecha, estado){
         let x = new modelReminder.Reminder(0, materia, titulo, descripcion, fecha, estado);
         var result = new DatabaseHandler().createDBObject("Reminder", x);
-        result.then((lastId) => x["id"] = lastId);
-        return x;   
+        result.then((lastId) => x.Id = lastId);
+        return x;  
 
     }
     updateReminder(object, materia, titulo, descripcion, fecha, estado){
-        let x = new modelReminder.Reminder(object["id"], materia, titulo, descripcion, fecha, estado);
+        let x = new modelReminder.Reminder(object.Id, materia, titulo, descripcion, fecha, estado);
         var result = new DatabaseHandler().updateDBObject("Reminder", x);
-        return;
+        return x;
     }
 
     deleteReminderById(id){

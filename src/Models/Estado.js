@@ -17,6 +17,27 @@ class Estado{
 
         estadoList.push(this);
     }
+    
+    get Id(){
+        return this.id;
+    }
+    set Id(id){
+        this.id = id;
+    }
+
+    get Descripcion() {
+        return this.descripcion;
+    }
+    set Descripcion(descripcion){
+        this.descripcion = descripcion;
+    }
+
+    get TipoEstado(){
+        return this.tipoEstado;
+    }
+    set TipoEstado(tipoEstado){
+        this.tipoEstado = tipoEstado;
+    }
 }
 
 function EstadosReminder(){
