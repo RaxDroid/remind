@@ -6,6 +6,8 @@
   <title>Re-Mind</title>
   <link rel="stylesheet" href="index.css" />
   <script type="text/javascript" src="./Contents/jquery/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="./Contents/Plug-in/loadTemplate/jquery.loadTemplate.min.js"></script>
+  <script type="text/javascript" src="./Contents/Plug-in/loadTemplate/jquery.loadTemplate.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
@@ -15,12 +17,56 @@
   <aside>
     <div class="sidebuttons">
       <button id="create-rem">Nuevo recordatorio</button>
-      <button class="materia">Crear <br> Materia</button>
-      <button class="materia">Eliminar Materia</button>
+      <div class="form" id="form1">
+        <div>
+          <label for="titulo">Titulo: </label>
+          <input type="text" id="titulo">
+        </div>
+        <div>
+          <label for="descripcion">Descripcion: </label>
+          <input type="text" id="descripcion">
+        </div>
+        <div>
+          <label for="matSel">Materia:</label>
+          <select name="matSel" id="matSel">
+            <option value="0">Seleccione una materia</option>
+          </select>
+        </div>
+        <div>
+          <p>Date: <input type="text" id="datepicker"></p>
+        </div>
+        <button class="submit" id="createRecbtn">Crear</button>
+      </div>
+      <button id="create-mat" class="materia">Crear <br> Materia</button>
+      <div class="form" id="form2">
+        <div>
+          <label for="nombre">Nombre: </label>
+          <input type="text" id="nombre">
+        </div>
+        <div>
+          <label for="descripcion">Descripcion: </label>
+          <input type="text" id="descripcion">
+        </div>
+        <div>
+          <label for="color">Color: </label>
+          <input type="color" name="color" id="color">
+        </div>
+        <button class="submit" id="createMatbtn">Crear</button>
+      </div>
+      <button id="delete-mat" class="materia">Eliminar Materia</button>
+      <div class="form" id="form3">
+        <div>
+          <label for="matDel">Materia:</label>
+          <select name="matDel" id="matDel">
+            <option value="0">Seleccione una materia</option>
+          </select>
+        </div>
+        <button class="submit" id="deleteMatbtn">Eliminar</button>
+      </div>
     </div>
     <div class="export">
-      <button>Exportar a CSV</button>
-      <button>Exportar a PDF</button>
+      <button id="csv">Exportar a CSV</button>
+      <button id="pdf">Exportar a PDF</button>
     </div>
   </aside>
   <main>
@@ -33,7 +79,7 @@
       <div class="rem-block"></div>
     </section>
     <section id="panel2" class="panel">
-      <p>Pene</p>
+      <p>Reminder 2</p>
     </section>
   </main>
   <!-- <script src="Presentation\presentationLayer.js"></script> -->

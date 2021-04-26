@@ -25,10 +25,67 @@ $(function () {
         collapsible: true
     });
 
-    // $('#create-rem').on('click', function () {
-    //     alert();
-    //     const { BrowserWindow } = require('electron')
-    //     const win = new BrowserWindow({ width: 800, height: 600 })
-    //     win.loadURL(`file://${__dirname}/index.html`);
-    // });
+    $('#create-rem').on('click', function () {
+        if ($(".form#form1").hasClass('active')) {
+            $('.form.active#form1').removeClass('active');
+        }
+        else {
+            $('.form#form1').addClass('active');
+        }
+        //Codigo aqui para poblar select
+    });
+
+    $("#datepicker").datepicker();
+
+    $('#createRecbtn').on('click', function () {
+
+        //Codigo aqui para crear Recordatorio
+
+        $('.form.active#form1').removeClass('active');
+    })
+    // $.getScript("functions.js", function () {
+
+    // })
+
+    $('#create-mat').on('click', function () {
+        if ($(".form#form2").hasClass('active')) {
+            $('.form.active#form2').removeClass('active');
+        }
+        else {
+            $('.form#form2').addClass('active');
+        }
+    });
+
+    $('#createMatbtn').on('click', function () {
+
+        //Codigo aqui para crear Materia
+
+        $('.form.active#form2').removeClass('active');
+    })
+
+    $('#delete-mat').on('click', function () {
+        if ($(".form#form3").hasClass('active')) {
+            $('.form.active#form3').removeClass('active');
+        }
+        else {
+            $('.form#form3').addClass('active');
+        }
+
+        //Codigo aqui para poblar select
+    });
+
+    $('#deleteMatbtn').on('click', function () {
+
+        //Codigo aqui para borrar Materia
+
+        $('.form.active#form3').removeClass('active');
+    })
+
+    $('#csv').on('click', function () {
+        //Codigo aqui para exportar a CSV
+    });
+
+    $('#pdf').on('click', function () {
+        //Codigo aqui para exportar a PDF
+    });
 });
