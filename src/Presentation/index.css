@@ -126,3 +126,16 @@ aside {
 .submit {
   margin: 0.8em 0;
 }
+
+.reminder {
+  height: 300px;
+  font-size: 0.7em;
+}
+
+.interact:hover {
+  background-color: #ebc458;
+}
+
+.interact:active {
+  background-color: #ccaa4d;
+}
