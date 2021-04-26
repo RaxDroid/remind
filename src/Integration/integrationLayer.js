@@ -1,24 +1,44 @@
 //  Packages
-
-const { ipcMain } = require('electron');
 var sqlite3 = require('sqlite3').verbose();
-
-//  Constants and Variables
-
 
 //  Logic
 
-class databaseHandler {
+class Handler{
+    constructor(){
+
+    }
+    getObject(){
+        return this;
+    }
+}
+class databaseHandler extends Handler{
+    constructor(){
+        super();
+    }
+
+    start(){
+        const db = new sqlite3.Database('app.db',  (err) => {
+            if (err) console.error('Database opening error: ', err);
+           });
+           this.db = db;
+           
+        }
+
+    stop(){
+        this.db.close();
+    }
+    
+    getDBobject(){
+        return this.db;
+    }
     
 }
-const db = new sqlite3.Database('app.db',  (err) => {
-    if (err) console.error('Database opening error: ', err);
-});
 
+class MateriaHandler{
+    getMateria(){
 
-ipcMain.on('asynchronous-message', (event, arg) => {
-    const sql = arg;
-    database.all(sql, (err, rows) => {
-        event.reply('asynchronous-reply', (err && err.message) || rows);
-    });
-});
+    }
+    
+    
+
+}
