@@ -23,7 +23,7 @@ class databaseHandler extends Handler{
     }
 
     start(){
-        const db = new sqlite3.Database('app.db',  (err) => {
+        var db = new sqlite3.Database('./app.db',  (err) => {
             if (err) return console.error('Database opening error: ', err);
            });
            console.log('Connected to the app\'s SQlite database.');
@@ -41,109 +41,130 @@ class databaseHandler extends Handler{
     }
 
     getAllDBObjects(objectName){
-        this.db.start();
-        let sql = "SELECT * FROM " + objectName;
+        this.start();
+        
+        var sql = "SELECT * FROM " + objectName;
         var result = [];
         try {
-            this.db.each(sql, (err, row) => { 
-                if (err) throw 00; 
-                result.push(row);
-            });
-
-        } catch (error) {
-            console.error(error)
-        }
-        this.stop();
-        return result;
-        
-    }
-
-    getDBObjectById(objectName, id){
-        
-        this.db.start();
-        let sql = "SELECT * FROM " + objectName + "WHERE " + objectName + "Id = ?";
-
-        try {
-            this.db.get(sql, id, (err, row) => { 
-                if (err) throw 00;
-                this.stop();
-                return row ? row : console.error("No record found");
+            
+            return new Promise((resolve, reject) => {
+                this.db.all(sql, function(err, rows){
+                if (err) reject(err);
+                resolve(rows);
+                });
+            
+            this.stop();
             });
 
         } catch (error) {
             console.error(error);
         }
+        
+    }
+
+    getDBObjectById(objectName, id){
+        
+        this.start();
+
+        try {
+
+            return new Promise((resolve, reject) => {
+                let sql = "SELECT * FROM " + objectName + " WHERE " + objectName + "Id = ?";
+                this.db.get(sql, [id],(err, row) => { 
+                if (err) reject(err);
+                this.stop();
+                resolve(row);
+            });
+        })
+        } catch(error){
+            console.error(error);
+        }
+            
     }
     
     createDBObject(objectName, object){
 
         var resultId;
+        var nameData;
         var data;
-        this.db.start();
+        this.start();
         
-        let sql = "INSERT INTO " + objectName + "VALUES(?)";
         try {
             if(objectName == "Materia"){
-                data = object["nombre"] + ", " + object["estado"]["id"] + ", " + object["color"];
+                data = "\"" + object["nombre"] + "\",\"" + object["estado"] + "\", \"" + object["color"] + "\"";
+                nameData = "Nombre, Estado, Color";
             }
             else if(objectName == "Reminder"){
-                data = object["materia"]["id"] + ", " + object["titulo"] + ", " + object["descripcion"] + ", " + object["fecha"] + ", " + object["estado"]["id"];
+                data = object["materia"] + ", \"" + object["titulo"] + "\", \"" + object["descripcion"] + "\", \"" + object["fecha"] + "\", " + object["estado"];
+                nameData = " MateriaId, Titulo, Descripcion, Fecha, Estado"
             }
-            this.db.run(sql, data, resultId = this.lastId);
-            this.stop();
-            return resultId;
-        } 
+            let sql = 'INSERT INTO ' + objectName + "(" + nameData + ")" + " VALUES( " + data + " )";
+            
+            return new Promise((resolve, reject) => {
+                this.db.run(sql, [], function(err) { 
+                if (err) {
+                    reject(err);
+                } resolve(this.lastId)});
+                this.stop();
+        })}
         catch (error) {
             console.error(error);
         }
     }
 
     updateDBObject(objectName, object){
-
+        this.start();
         let sql = "UPDATE " + objectName + " SET ? WHERE " + objectName + "Id = " + object["id"];
 
         if(objectName == "Materia"){
-            let data = "Nombre = " + object["nombre"] + ", Estado = " + object["estado"]["id"] + ", Color = " + object["color"];
+            let data = "Nombre = " + object["nombre"] + ", Estado = " + object["estado"] + ", Color = " + object["color"];
         }
         else if(objectName == "Reminder"){
-            let data = "Materia = " + object["materia"]["id"] + ", Titulo = " + object["titulo"] + ", Descripcion = " + object["descripcion"] + ", Fecha =" + object["fecha"] + ", Estado = " + object["estado"]["id"];
+            let data = "Materia = " + object["materia"] + ", Titulo = " + object["titulo"] + ", Descripcion = " + object["descripcion"] + ", Fecha =" + object["fecha"] + ", Estado = " + object["estado"];
         }
-
-        db.run(sql, data, function(err) {
+        
+        return new Promise((resolve, reject) => {
+        this.db.run(sql, data, function(err) {
         if (err) {
-            return console.error(err.message);
+            reject(err);
         }
-        console.log(`Row(s) updated: ${this.changes}`);
-    });
+        resolve(this.changes);});
+        this.stop();
+        });
 }
 
     deleteDBObjectById(objectName, id){
-        this.db.start();
-        this.db.run('DELETE FROM' + objectName + "WHERE " + objectName + "Id = ?", id, function(err) {
+        this.start();
+    
+        return new Promise((resolve, reject) => {
+        this.db.run('DELETE FROM ' + objectName + " WHERE " + objectName + "Id = ?", [id], function(err) {
             if (err) {
-                this.stop();
-                return console.error(err.message);
+                reject(err);
             }
+            resolve(this.changes);
             console.log(`Row(s) deleted ${this.changes}`);
           });
           this.stop();
-          return;
-          
-    }
+    
+    });
+}
     
 }
 
 class MateriaHandler{
+    constructor(){
+
+    }
     getMateriaById(id){
         var result = new databaseHandler().getDBObjectById("Materia",id);
         return result;
     }
 
     createMateria(nombre, estado, color){
-        let x = new modelMateria.Materia(0, nombre, estado, color);
+        var x = new modelMateria.Materia(0, nombre, estado, color);
         var result = new databaseHandler().createDBObject("Materia", x);
-        x["id"] = result;
-        return x;   
+        result.then((lastId) => x["id"] = lastId);
+        return x;
     }
 
     updateMateria(object, nombre, estado, color){
@@ -154,17 +175,20 @@ class MateriaHandler{
 
     deleteMateriaById(id){
         var result = new databaseHandler().deleteDBObjectById("Materia", id);
-        return;
+        return result;
     }
 
     getAllMaterias(){
-        var result = new databaseHandler().getAllDBObjects("Materia");
+        let result = new databaseHandler().getAllDBObjects("Materia");
         return result;
     }
 }
 
 class ReminderHandler{
-    getReminder(name){
+    constructor(){
+        
+    }
+    getReminderById(id){
         var result = new databaseHandler().getDBObjectById("Reminder",id);
         return result;
     }
@@ -172,7 +196,7 @@ class ReminderHandler{
     createReminder(materia, titulo, descripcion, fecha, estado){
         let x = new modelReminder.Reminder(0, materia, titulo, descripcion, fecha, estado);
         var result = new databaseHandler().createDBObject("Reminder", x);
-        x["id"] = result;
+        result.then((lastId) => x["id"] = lastId);
         return x;   
 
     }
@@ -182,9 +206,9 @@ class ReminderHandler{
         return;
     }
 
-    deleteReminder(id){
+    deleteReminderById(id){
         var result = new databaseHandler().deleteDBObjectById("Reminder", id);
-        return;
+        return result;
     }
 
     getAllReminders(){
@@ -194,3 +218,5 @@ class ReminderHandler{
 
 }
 
+exports.MateriaHandler = MateriaHandler;
+exports.ReminderHandler = ReminderHandler;

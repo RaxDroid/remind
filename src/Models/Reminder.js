@@ -8,7 +8,7 @@ let reminderTypes = {
 
 //  Logic
 
-class Materia{
+class Reminder{
     constructor(id, materia, titulo, descripcion, fecha, estado){
         this.id = id;
         this.materia = materia;
@@ -18,3 +18,4 @@ class Materia{
         this.estado = estado;
     }
 }
+exports.Reminder = Reminder;

@@ -14,3 +14,4 @@ class Estado{
         this.tipoEstado = tipoEstado;
     }
 }
+exports.Estado = Estado;

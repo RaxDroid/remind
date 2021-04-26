@@ -15,3 +15,4 @@ class Materia{
         this.color = color;
     }
 }
+exports.Materia = Materia;
