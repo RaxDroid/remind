@@ -233,7 +233,7 @@ class EstadoService{
 }
 class ExportsService{
     processExport(exportType){
-        const exportSucess = integrationLayer.ExportsHandler.generateExport(exportType, reminderList, materiaList);
+        const exportSucess = new ExportsHandler().generateExport(exportType, reminderList, materiaList);
 
         if (exportSucess["bool"]){
             return exportSucess["path"];
