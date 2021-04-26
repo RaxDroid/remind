@@ -17,7 +17,7 @@ class Handler{
         return this;
     }
 }
-class databaseHandler extends Handler{
+class DatabaseHandler extends Handler{
     constructor(){
         super();
     }
@@ -156,30 +156,30 @@ class MateriaHandler{
 
     }
     getMateriaById(id){
-        var result = new databaseHandler().getDBObjectById("Materia",id);
+        var result = new DatabaseHandler().getDBObjectById("Materia",id);
         return result;
     }
 
     createMateria(nombre, estado, color){
         var x = new modelMateria.Materia(0, nombre, estado, color);
-        var result = new databaseHandler().createDBObject("Materia", x);
+        var result = new DatabaseHandler().createDBObject("Materia", x);
         result.then((lastId) => x["id"] = lastId);
         return x;
     }
 
     updateMateria(object, nombre, estado, color){
         let x = new modelReminder.Reminder(object["id"], nombre, estado, color);
-        var result = new databaseHandler().updateDBObject("Materia", x);
+        var result = new DatabaseHandler().updateDBObject("Materia", x);
         return;
     }
 
     deleteMateriaById(id){
-        var result = new databaseHandler().deleteDBObjectById("Materia", id);
+        var result = new DatabaseHandler().deleteDBObjectById("Materia", id);
         return result;
     }
 
     getAllMaterias(){
-        let result = new databaseHandler().getAllDBObjects("Materia");
+        let result = new DatabaseHandler().getAllDBObjects("Materia");
         return result;
     }
 }
@@ -189,30 +189,30 @@ class ReminderHandler{
         
     }
     getReminderById(id){
-        var result = new databaseHandler().getDBObjectById("Reminder",id);
+        var result = new DatabaseHandler().getDBObjectById("Reminder",id);
         return result;
     }
 
     createReminder(materia, titulo, descripcion, fecha, estado){
         let x = new modelReminder.Reminder(0, materia, titulo, descripcion, fecha, estado);
-        var result = new databaseHandler().createDBObject("Reminder", x);
+        var result = new DatabaseHandler().createDBObject("Reminder", x);
         result.then((lastId) => x["id"] = lastId);
         return x;   
 
     }
     updateReminder(object, materia, titulo, descripcion, fecha, estado){
         let x = new modelReminder.Reminder(object["id"], materia, titulo, descripcion, fecha, estado);
-        var result = new databaseHandler().updateDBObject("Reminder", x);
+        var result = new DatabaseHandler().updateDBObject("Reminder", x);
         return;
     }
 
     deleteReminderById(id){
-        var result = new databaseHandler().deleteDBObjectById("Reminder", id);
+        var result = new DatabaseHandler().deleteDBObjectById("Reminder", id);
         return result;
     }
 
     getAllReminders(){
-        var result = new databaseHandler().getAllDBObjects("Reminder");
+        var result = new DatabaseHandler().getAllDBObjects("Reminder");
         return result;
     }
 
