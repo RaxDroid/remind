@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Re-Mind</title>
+  <link rel="stylesheet" href="index.css" />
+  <script type="text/javascript" src="../Contents/jquery/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../Contents/Plug-in/loadTemplate/jquery.loadTemplate.min.js"></script>
+  <script type="text/javascript" src="../Contents/Plug-in/loadTemplate/jquery.loadTemplate.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+  <h1>Re-mind</h1>
+  <aside>
+    <div class="sidebuttons">
+      <button id="create-rem">Nuevo recordatorio</button>
+      <div class="form" id="form1">
+        <div>
+          <label for="titulo">Titulo: </label>
+          <input type="text" id="titulo">
+        </div>
+        <div>
+          <label for="descripcion">Descripcion: </label>
+          <input type="text" id="descripcion">
+        </div>
+        <div>
+          <label for="matSel">Materia:</label>
+          <select name="matSel" id="matSel">
+            <option value="0">Seleccione una materia</option>
+          </select>
+        </div>
+        <div>
+          <p>Date: <input type="text" id="datepicker"></p>
+        </div>
+        <button class="submit" id="createRecbtn">Crear</button>
+      </div>
+      <button id="create-mat" class="materia">Crear <br> Materia</button>
+      <div class="form" id="form2">
+        <div>
+          <label for="nombre">Nombre: </label>
+          <input type="text" id="nombre">
+        </div>
+        <div>
+          <label for="descripcion">Descripcion: </label>
+          <input type="text" id="descripcion">
+        </div>
+        <div>
+          <label for="color">Color: </label>
+          <input type="color" name="color" id="color">
+        </div>
+        <button class="submit" id="createMatbtn">Crear</button>
+      </div>
+      <button id="delete-mat" class="materia">Eliminar Materia</button>
+      <div class="form" id="form3">
+        <div>
+          <label for="matDel">Materia:</label>
+          <select name="matDel" id="matDel">
+            <option value="0">Seleccione una materia</option>
+          </select>
+        </div>
+        <button class="submit" id="deleteMatbtn">Eliminar</button>
+      </div>
+    </div>
+    <div class="export">
+      <button id="csv">Exportar a CSV</button>
+      <button id="pdf">Exportar a PDF</button>
+    </div>
+  </aside>
+  <main>
+    <div class="tabs">
+      <button rel="panel1" class="tab active" id="pending">Pendientes</button>
+      <button rel="panel2" class="tab" id="completed">Completados</button>
+    </div>
+    <section id="panel1" class="panel active">
+      <h3 id="rectitle">Reminder 3</h3>
+      <div class="reminder" id="4">
+        <h4>Descripcion</h4>
+        <p id="recdesc">Terminar Presentation layer</p>
+        <h4>Materia: </h4>
+        <p id="recname">Arquitectura de Software</p>
+        <h4>Fecha: </h4>
+        <p id="recdate">4/26/2021</p>
+
+        <button class="interact" id="comprem4">Marcar como completado</button>
+        <button class="interact" id="delrem4">Eliminar recordatorio</button>
+      </div>
+      <h3 id="rectitle">Reminder 3</h3>
+      <div class="reminder" id="5">
+        <h4>Descripcion</h4>
+        <p id="recdesc">Terminar Presentation layer</p>
+        <h4>Materia: </h4>
+        <p id="recname">Arquitectura de Software</p>
+        <h4>Fecha: </h4>
+        <p id="recdate">4/26/2021</p>
+
+        <button class="interact" id="comprem5">Marcar como completado</button>
+        <button class="interact" id="delrem5">Eliminar recordatorio</button>
+      </div>
+    </section>
+    <section id="panel2" class="panel">
+      <h3 id="rectitle">Reminder 3</h3>
+      <div class="reminder" id="1">
+        <h4>Descripcion</h4>
+        <p id="recdesc">Terminar Presentation layer</p>
+        <h4>Materia: </h4>
+        <p id="recname">Arquitectura de Software</p>
+        <h4>Fecha: </h4>
+        <p id="recdate">4/26/2021</p>
+
+        <!-- <button class="interact" id="comprem1">Marcar como completado</button> -->
+        <button class="interact" id="delrem1">Eliminar recordatorio</button>
+      </div>
+      <h3 id="rectitle">Reminder 2</h3>
+      <div class="reminder" id="2">
+        <h4>Descripcion</h4>
+        <p id="recdesc">Terminar Presentation layer</p>
+        <h4>Materia: </h4>
+        <p id="recname">Arquitectura de Software</p>
+        <h4>Fecha: </h4>
+        <p id="recdate">4/26/2021</p>
+
+        <!-- <button class="interact" id="comprem2">Marcar como completado</button> -->
+        <button class="interact" id="delrem2">Eliminar recordatorio</button>
+      </div>
+      <h3 id="rectitle">Reminder 3</h3>
+      <div class="reminder" id="3">
+        <h4>Descripcion</h4>
+        <p id="recdesc">Terminar Presentation layer</p>
+        <h4>Materia: </h4>
+        <p id="recname">Arquitectura de Software</p>
+        <h4>Fecha: </h4>
+        <p id="recdate">4/26/2021</p>
+
+        <!-- <button class="interact" id="comprem3">Marcar como completado</button> -->
+        <button class="interact" id="delrem3">Eliminar recordatorio</button>
+      </div>
+    </section>
+  </main>
+</body>
+<script src="page.js"></script>
+<script type="html/text" src="reminder.html"></script>
+
+</html>
