@@ -77,26 +77,45 @@ class databaseHandler extends Handler{
     
     createDBObject(objectName, object){
 
+        var resultId;
+        var data;
         this.db.start();
+        
         let sql = "INSERT INTO " + objectName + "VALUES(?)";
         try {
             if(objectName == "Materia"){
-                this.db.run(sql, object["nombre"] + ", " + object["estado"] + ", " + object["color"]);
-                this.stop();
-                return console.log("completed");
-
+                data = object["nombre"] + ", " + object["estado"]["id"] + ", " + object["color"];
             }
             else if(objectName == "Reminder"){
-                this.db.run(sql, object["materia"]["id"] + ", " + object["titulo"] + ", " + object["descripcion"] + ", " + object["fecha"] + ", " + object["estado"]["id"]);
-                this.stop();
-                return console.log("completed");
+                data = object["materia"]["id"] + ", " + object["titulo"] + ", " + object["descripcion"] + ", " + object["fecha"] + ", " + object["estado"]["id"];
             }
-            
-
-        } catch (error) {
+            this.db.run(sql, data, resultId = this.lastId);
+            this.stop();
+            return resultId;
+        } 
+        catch (error) {
             console.error(error);
         }
     }
+
+    updateDBObject(objectName, object){
+
+        let sql = "UPDATE " + objectName + " SET ? WHERE " + objectName + "Id = " + object["id"];
+
+        if(objectName == "Materia"){
+            let data = "Nombre = " + object["nombre"] + ", Estado = " + object["estado"]["id"] + ", Color = " + object["color"];
+        }
+        else if(objectName == "Reminder"){
+            let data = "Materia = " + object["materia"]["id"] + ", Titulo = " + object["titulo"] + ", Descripcion = " + object["descripcion"] + ", Fecha =" + object["fecha"] + ", Estado = " + object["estado"]["id"];
+        }
+
+        db.run(sql, data, function(err) {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log(`Row(s) updated: ${this.changes}`);
+    });
+}
 
     deleteDBObjectById(objectName, id){
         this.db.start();
@@ -123,6 +142,13 @@ class MateriaHandler{
     createMateria(nombre, estado, color){
         let x = new modelMateria.Materia(0, nombre, estado, color);
         var result = new databaseHandler().createDBObject("Materia", x);
+        x["id"] = result;
+        return x;   
+    }
+
+    updateMateria(object, nombre, estado, color){
+        let x = new modelReminder.Reminder(object["id"], nombre, estado, color);
+        var result = new databaseHandler().updateDBObject("Materia", x);
         return;
     }
 
@@ -143,11 +169,17 @@ class ReminderHandler{
         return result;
     }
 
-    createReminder(){
-        let x = new modelReminder.Reminder(0, nombre, estado, color);
+    createReminder(materia, titulo, descripcion, fecha, estado){
+        let x = new modelReminder.Reminder(0, materia, titulo, descripcion, fecha, estado);
         var result = new databaseHandler().createDBObject("Reminder", x);
-        return result;
+        x["id"] = result;
+        return x;   
 
+    }
+    updateReminder(object, materia, titulo, descripcion, fecha, estado){
+        let x = new modelReminder.Reminder(object["id"], materia, titulo, descripcion, fecha, estado);
+        var result = new databaseHandler().updateDBObject("Reminder", x);
+        return;
     }
 
     deleteReminder(id){
