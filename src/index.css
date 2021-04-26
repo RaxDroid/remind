@@ -6,11 +6,20 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #FAF9F9;
+  background-color: #CFDBD5;
+  height: 534px;
+}
+
+h1 {
+  text-align: center;
+  margin: 1em 0 0 0;
 }
 
 button {
   outline: none;
+  background-color: #F5CB5C;
+  color: #333533;
+  border: 2px solid #333533;
 }
 
 main {
@@ -30,7 +39,6 @@ main {
   font-size: 1rem;
   flex: 1;
   padding: 0.2em;
-  border-radius: 0.4rem;
 }
 
 aside {
@@ -44,12 +52,35 @@ aside {
   border-right: 1px solid grey;
 }
 
-aside > button {
+.sidebuttons > button {
   width: 100%;
   font-size: 1.3rem;
   justify-content: center;
   margin: 0.6em 0.2em;
-  border-radius: 1.5em;
-  padding: 0 0.2em;
+  /* border-radius: 1.5em; */
+  padding: 0.5em;
+  flex: 1;
+}
+
+#reminders {
+  width: 100%;
+  border: 0.2px solid grey;
+}
+
+.sidebuttons .materia{
+  margin: 0 0 0 0.2em;
+}
+
+.export {
+  margin: 0.9em 0;
+}
+
+.export > button{
+  width: 100%;
+  font-size: 1.3rem;
+  justify-content: center;
+  margin: 0 0 0 0.2em;
+  /* border-radius: 1.5em; */
+  padding: 0.5em;
   flex: 1;
 }
