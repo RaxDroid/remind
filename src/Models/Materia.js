@@ -3,8 +3,8 @@
 let Estado = require("./Estado.js");
 
 let materiaTypes = {
-    "Inactivo": 4,
-    "Activo": 5
+    "Inactivo": 0,
+    "Activo": 1
 }
 
 //  Logic
@@ -19,11 +19,34 @@ class Materia{
     get Id(){
         return this.id;
     }
+    set Id(id){
+        this.id = id;
+    }
 
     get Nombre() {
         return this.nombre;
     }
+    set Nombre(nombre){
+        this.nombre = nombre;
+    }
     
+    get Estado() {
+        return this.estado;
+    }
+    set Estado(estado){
+        this.estado = estado;
+    }
+    get EstadoId() {
+        return this.estado["id"];
+    }
+    
+    get Color() {
+        return this.color;
+    }
+    set Color(color){
+        this.color = color;
+    }
+
     get EstadoDescription(){
         let estadoObject = EstadosMateria()
          estadoObject.forEach(element => {
