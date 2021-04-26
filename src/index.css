@@ -108,3 +108,21 @@ aside {
   padding: 0.5em;
   flex: 1;
 }
+
+#descripcion {
+  height: 10%;
+}
+
+.form {
+  margin: 0.8em 0;
+  outline: none;
+  display: none;
+}
+
+.form.active {
+  display: block;
+}
+
+.submit {
+  margin: 0.8em 0;
+}
