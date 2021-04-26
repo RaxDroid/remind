@@ -5,6 +5,9 @@
   <meta charset="UTF-8" />
   <title>Re-Mind</title>
   <link rel="stylesheet" href="index.css" />
+  <script type="text/javascript" src="./Contents/jquery/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
@@ -22,47 +25,19 @@
   </aside>
   <main>
     <div class="tabs">
-      <button id="pending">Pendientes</button>
-      <button id="completed">Completados</button>
+      <button rel="panel1" class="tab active" id="pending">Pendientes</button>
+      <button rel="panel2" class="tab" id="completed">Completados</button>
     </div>
-    <section id="reminders">
-      <div class="rem-block">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint atque sit delectus itaque suscipit rem incidunt
-          aliquid provident, autem quos earum adipisci veniam id dolore, voluptatibus non. Magni, id doloremque!</p>
-      </div>
-      <div class="rem-block">
-        <p>Recusandae veniam exercitationem tenetur animi pariatur corporis numquam, beatae natus expedita ex fugit
-          obcaecati quos cumque. Sint aspernatur in reprehenderit ducimus hic earum libero sunt delectus. Laborum alias
-          accusantium provident.</p>
-      </div>
-      <div class="rem-block">
-        <p>Amet possimus animi sapiente tempore ut veniam neque facilis asperiores provident vitae. Ipsam fugit
-          necessitatibus dolor dolore, commodi est voluptatum velit voluptates, in nulla assumenda autem totam? Nulla,
-          animi totam.</p>
-      </div>
-      <div class="rem-block">
-        <p>Alias, asperiores dolore beatae repudiandae itaque iusto? Velit accusamus nihil consequatur cupiditate,
-          fugiat labore, hic aliquam, provident perspiciatis non in nisi quis fugit praesentium soluta doloremque! Harum
-          similique neque dolores.</p>
-      </div>
-      <div class="rem-block">
-        <p>Alias, asperiores dolore beatae repudiandae itaque iusto? Velit accusamus nihil consequatur cupiditate,
-          fugiat labore, hic aliquam, provident perspiciatis non in nisi quis fugit praesentium soluta doloremque! Harum
-          similique neque dolores.</p>
-      </div>
-      <div class="rem-block">
-        <p>Alias, asperiores dolore beatae repudiandae itaque iusto? Velit accusamus nihil consequatur cupiditate,
-          fugiat labore, hic aliquam, provident perspiciatis non in nisi quis fugit praesentium soluta doloremque! Harum
-          similique neque dolores.</p>
-      </div>
-      <div class="rem-block">
-        <p>Alias, asperiores dolore beatae repudiandae itaque iusto? Velit accusamus nihil consequatur cupiditate,
-          fugiat labore, hic aliquam, provident perspiciatis non in nisi quis fugit praesentium soluta doloremque! Harum
-          similique neque dolores.</p>
-      </div>
+    <section id="panel1" class="panel active">
+      <h3 class="name">Reminder 1</h3>
+      <div class="rem-block"></div>
+    </section>
+    <section id="panel2" class="panel">
+      <p>Pene</p>
     </section>
   </main>
-  <script src="Presentation\presentationLayer.js"></script>
+  <!-- <script src="Presentation\presentationLayer.js"></script> -->
 </body>
+<script src="tabs.js"></script>
 
 </html>

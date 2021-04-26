@@ -49,6 +49,14 @@ main {
   padding: 0.2em;
 }
 
+.tabs .tab:hover {
+  background-color: #ebc458;
+}
+
+.tabs .tab.active {
+  background-color: #ccaa4d;
+}
+
 aside {
   display: inline-flex;
   align-items: flex-start;
@@ -70,17 +78,17 @@ aside {
   flex: 1;
 }
 
-#reminders {
+.panel{
+  display: none;
+}
+
+.panel.active {
+  display: block;
   width: 100%;
   border: 0.2px solid grey;
   overflow-x: hidden;
   overflow-y: auto;
   height: 88%;
-}
-
-#reminders div {
-  margin: 0.4em;
-  border: 0.2px solid grey;
 }
 
 .sidebuttons .materia{
