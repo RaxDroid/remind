@@ -7,7 +7,7 @@ var sqlite3 = require('sqlite3').verbose();
 
 //  Constants
 
-  let dbObjects = ["Reminder", "Materia", "Estado"]
+  let dbObjects = ["Reminder", "Materia", "Estado"];
 
 //  Logic
 
@@ -252,19 +252,20 @@ class ExportsHandler extends Handler{
         super();
     }
 
-    generateExport(exportType){
-        var jsonObject = JSON.stringify(items);
+    generateExport(exportType, reminderList, materiaList){
+        var jsonObject1 = JSON.stringify(reminderList);
+        var jsonObject2 = JSON.stringify(materiaList);
         var fs = require('fs');
 
         if (exportType = "json"){
             let path = Date.now() + "_Export.json";
-            fs.writeFile(path, jsonObject);
+            fs.writeFile(path, jsonObject1 + jsonObject2);
             return { "bool" : true, "path" : path}
         }
 
         else if (exportType = "csv"){
             let path = Date.now() + "_Export.csv";
-            fs.writeFile(path, ConvertToCSV(jsonObject));
+            fs.writeFile(path, ConvertToCSV(jsonObject1 + jsonObject2));
             return { "bool" : true, "path" : path}
         }
 
