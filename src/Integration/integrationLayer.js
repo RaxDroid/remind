@@ -18,7 +18,7 @@ class databaseHandler extends Handler{
 
     start(){
         const db = new sqlite3.Database('app.db',  (err) => {
-            if (err) console.error('Database opening error: ', err);
+            if (err) return console.error('Database opening error: ', err);
            });
            this.db = db;
            
@@ -27,18 +27,31 @@ class databaseHandler extends Handler{
     stop(){
         this.db.close();
     }
-    
-    getDBobject(){
-        return this.db;
+
+    getDBobject(objectName){
+        try {
+            this.db.get()
+        } catch (error) {
+            
+        }
     }
     
 }
 
+let dbObjects = ["Reminder", "Materia", "Estado", "TipoEstado"]
 class MateriaHandler{
-    getMateria(){
+    getMateria(name){
 
     }
-    
-    
 
+    createMateria(){
+
+    }
+
+    deleteMateria(){
+
+    }
+    getAllMaterias(){
+
+    }
 }
