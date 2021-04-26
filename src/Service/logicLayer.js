@@ -1,6 +1,10 @@
+//  Packages
 
-let materias = [ ]
+var modelReminder = require('../Models/Reminder.js');
+var modelMateria = require('../Models/Materia.js');
+var modelEstado = require('../Models/Estado.js');
 
-function addMateria(materia){
-    materias.push(materia)
-}
+//  Constants
+
+
+//  Logic
